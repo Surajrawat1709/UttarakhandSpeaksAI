@@ -1,0 +1,11 @@
+{
+    "/api": {
+    "target": "https://dffb2f875883e4333a526cd388d5a2851.clg07azjl.paperspacegradient.com/",
+    "secure": false,
+    "timeout": 60000,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true
+    }
+}

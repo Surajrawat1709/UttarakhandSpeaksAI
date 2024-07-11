@@ -1,0 +1,48 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,
+        initial-scale=1.0">
+
+  <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  </script>
+</head>
+<body>
+<div class="input-container">
+  <input type="text"  [(ngModel)]="message"  class="input-textfield" placeholder="What's on your mind?"  onfocus="this.value=''"
+  (keyup)="onKeyUp($event)">
+  <button class="button" (click)="sendMessage()">
+    <span > send </span>
+  </button>
+  <script>
+    $(document).ready(()=>{
+        $('#myBtn').click(()=>{
+            $('#parent').
+            children().remove();
+        });
+    });
+</script>
+</div>
+</body>
+
+<!-- <section class="user-input-container">
+  <input
+    class="input-textfield"
+    [(ngModel)]="message"
+    placeholder="What's on your mind?"
+    type="text" onfocus="this.value=''"
+    (keyup)="onKeyUp($event)"
+  />
+  <button class="button" (click)="sendMessage()">
+    <span class="material-symbols-outlined"> send </span>
+  </button>
+  <script>
+    $(document).ready(()=>{
+        $('#myBtn').click(()=>{
+            $('#parent').
+            children().remove();
+        });
+    });
+</script>
+</section> -->

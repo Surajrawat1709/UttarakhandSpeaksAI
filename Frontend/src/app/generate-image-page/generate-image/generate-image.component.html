@@ -1,0 +1,107 @@
+<body>
+  <mat-card class="generate-image">
+    <div class="card">
+
+      <div *ngIf="loading" class="loader-circle-9">
+        Loading
+        <span></span>
+
+    </div>
+    <div *ngIf="!loading">
+      <img
+        mat-card-image
+        style="height: 100%; width: 100%; margin: 1px 10px 0px 4px; border-radius: 2rem;"
+        [src]="currentImage"
+        alt="Current Image"
+      />
+    </div>
+
+      <div class="title">
+        <span>How to use?</span>
+      </div>
+      <div class="size">
+        <span><p>1) Choose from all 3 options to generate image of your choice.</p>
+          <p>2) Click on "Let's chat"  to go to the chat page.</p>
+         </span>
+
+      </div>
+      <div class="action">
+        <button class="cart-button" (click)="onChat('suraj')">
+        Let's chat
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="choose-character">
+    <mat-card-header>
+      <div class="e-card playing">
+        <div class="image"></div>
+
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+
+
+            <div class="infotop">
+
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon">
+      </svg><br>
+     Generate Image
+      <br>
+        </div>
+      </div>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Please, let me know what type of image you want to generate.</mat-label>
+        <input
+          matInput
+          #message
+          maxlength="30"
+          placeholder="Asking for direction from the locals."
+        />
+        <mat-hint align="start"><strong>Enter Prompt</strong> </mat-hint>
+        <mat-hint align="end">{{ message.value.length }} / 30</mat-hint>
+      </mat-form-field>
+    </form>
+    <label  class="text-format" style="margin-top: 60px;" id="example-radio-group-label" >Choose the scene to chat</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="favoriteView" >
+      @for (view of view; track view) {
+        <mat-radio-button class="example-radio-button" style="color: #d9d9d9" [value]="view">{{view}}</mat-radio-button>
+      }
+    </mat-radio-group>
+    <!-- <div>Your favorite season is: {{favoriteSeason}}</div> -->
+
+    <label  class="text-format" id="example-radio-group-label" >Choose your language</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="favoriteClothing" >
+      @for (type of type; track type) {
+        <mat-radio-button class="example-radio-button" style="color: #d9d9d9" [value]="type">{{type}}</mat-radio-button>
+      }
+    </mat-radio-group>
+    <label  class="text-format" id="example-radio-group-label" >Choose the mood of the person</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group" style="margin-bottom: 25px;"
+      [(ngModel)]="favoriteAction"  >
+      @for (mood of mood; track mood) {
+        <mat-radio-button class="example-radio-button"  [value]="mood">{{mood}}</mat-radio-button>
+      }
+    </mat-radio-group>
+
+    <div class="action1">
+      <button class="cart-button1" (click)="generateImg()">
+     Generate Image
+      </button>
+    </div>
+  </mat-card>
+
+</body>
+
+<router-outlet></router-outlet>
