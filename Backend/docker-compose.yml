@@ -1,0 +1,29 @@
+services:
+  mysql:
+    container_name: mysql-sql-bsn
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: Uttarakhand_Speaks
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - spring-demo
+    restart: unless-stopped
+  mail-dev:
+    container_name: mail-dev-bsn
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+networks:
+  spring-demo:
+    driver: bridge
+
+volumes:
+  mysql:
+    driver: local
