@@ -14,6 +14,8 @@ This website is about making people familar with our local languages, which are 
 - **User Management System:** Robust user management system for seamless registration, login, payment, and profile management.
 - **Responsive User Interface:** A responsive and user-friendly interface ensuring a seamless learning experience across devices.
 - **Secure Online Payments:** Integration with Razorpay for handling secure online payments for premium features and content.
+
+  
 ## Technologies Used
 
 **Java:** Core backend language
@@ -92,21 +94,3 @@ Project Structure
 ```
 
 
-## Screenshots
-
-**Landing Page**
-
-![Landing Page](https://github.com/Surajrawat1709/UttarakhandSpeaksAI/assets/60563826/3cff9062-7113-4251-b13d-f50d713f0d1a )
-
-
-**Customize Chat Page**
-
-![Customize](https://github.com/Surajrawat1709/UttarakhandSpeaksAI/assets/60563826/b4245f4f-9d71-4c11-85eb-e075c91060a3)
-
-**Chat Page**
-
-![Chat Page](https://github.com/Surajrawat1709/UttarakhandSpeaksAI/assets/60563826/080d771d-58ef-4056-8633-865b17316997)
-
-**SignUp/Login Page**
-
-![Login Page](https://github.com/Surajrawat1709/UttarakhandSpeaksAI/assets/60563826/498d65e8-2404-47f4-be4c-97ecb596a827)
