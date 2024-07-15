@@ -6,65 +6,41 @@
     [ngClass]="isSignDivVisiable ? 'active' : ''"
     id="container"
   >
-    <div class="form-container sign-up">
+    <div class="form-container sign-up" #scrollframe>
       <form>
         <h1>Create Account</h1>
-        <div class="social-icons">
-          <a href="#" class="icon"
-            ><i class="fa-brands fa-google-plus-g"></i
-          ></a>
-          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+        <div class="mb-3">
+          <label for="firstname" class="form-label">Firstname</label>
+          <input [(ngModel)]="registerRequest.firstname" type="text" class="form-control" id="firstname" name="firstname" placeholder="Firstname">
         </div>
-        <span>or use your email for registeration</span>
-        <input
-          type="text"
-          name="name"
-          [(ngModel)]="signUpObj.name"
-          placeholder="Name"
-        />
-        <input
-          type="email"
-          name="email"
-          [(ngModel)]="signUpObj.email"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="signUpObj.password"
-          placeholder="Password"
-        />
-        <button (click)="onRegister()">Sign Up</button>
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Lastname</label>
+          <input [(ngModel)]="registerRequest.lastname" type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname">
+        </div>
+        <div class="mb-3">
+          <label for="login" class="form-label">Email address</label>
+          <input [(ngModel)]="registerRequest.email" type="email" class="form-control" id="login" name="login" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input [(ngModel)]="registerRequest.password" type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button (click)="onRegister()"> <em class="fas fa-sign-in-alt">&nbsp;Create an account</em></button>
       </form>
     </div>
-    <div class="form-container sign-in">
+    <div class="form-container sign-in" #scrollframe>
       <form>
         <h1>Sign In</h1>
-        <div class="social-icons">
-          <a href="#" class="icon"
-            ><i class="fa-brands fa-google-plus-g"></i
-          ></a>
-          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+        <div class="mb-3">
+          <label for="login" class="form-label">Email address</label>
+          <input [(ngModel)]="authRequest.email"  type="email" class="form-control" id="login" name="login" placeholder="name@example.com">
         </div>
-        <span>or use your email password</span>
-        <input
-          type="email"
-          name="email"
-          [(ngModel)]="loginObj.email"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="loginObj.password"
-          placeholder="Password"
-        />
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input [(ngModel)]="authRequest.password" type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
         <a href="#">→ Forget Your Password? ←</a>
-        <button (click)="onLogin()">Sign In</button>
+        <button (click)="onLogin()"> <em class="fas fa-sign-in-alt">&nbsp;Sign in</em></button>
       </form>
     </div>
     <div class="toggle-container">
@@ -78,7 +54,7 @@
             id="login"
             (click)="isSignDivVisiable = false"
           >
-            Sign In
+          <em class="fas fa-sign-in-alt">&nbsp;Sign in</em>
           </button>
         </div>
         <div class="toggle-panel toggle-right">
