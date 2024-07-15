@@ -5,93 +5,71 @@ import { FormsModule } from '@angular/forms';
 import { LlamaChatApiService } from '../../llama-chat-api.service';
 import { SharedService } from '../../shared.service';
 import { HeaderComponent } from '../../ChatPage/header/header.component';
+import { AuthenticationService } from '../../services/services';
+import { AuthenticationRequest, RegistrationRequest } from '../../services/models';
+import { TokenService } from '../../services/token/token.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule,HeaderComponent],
+  imports: [CommonModule, FormsModule,HeaderComponent,],
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   isSignDivVisiable: boolean = true;
-
-  signUpObj: SignUpModel = new SignUpModel();
-  loginObj: LoginModel = new LoginModel();
+  authRequest: AuthenticationRequest = {email: '', password: ''};
+  registerRequest: RegistrationRequest = {email: '', firstname: '', lastname: '', password: ''};
+  errorMsg: Array<string> = [];
 
   message: string = '';
 
   constructor(
     private router: Router,
     private llamaservice: LlamaChatApiService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private authService: AuthenticationService,
+    private tokenService: TokenService
   ) {}
 
   onRegister() {
-    alert('Registration Success');
-    this.sharedService.changeData(this.signUpObj.name);
-    this.llamaservice
-      .createUser(this.signUpObj.name, this.signUpObj.name)
-      .subscribe(
-        (response) => {
-          this.message = response.message;
-          console.log(this.message);
+    this.errorMsg = [];
+    this.authService.register({
+      body: this.registerRequest
+    })
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/activate-account');
         },
-        (error) => {
-          console.error('Error creating user:', error);
-          this.message = 'An error occurred while creating the user.';
+        error: (err) => {
+          this.errorMsg = err.error.validationErrors;
+          this.showAlerts();
         }
-      );
-    const localUser = localStorage.getItem('angular17users');
-    if (localUser != null) {
-      const users = JSON.parse(localUser);
-      users.push(this.signUpObj);
-      localStorage.setItem('angular17users', JSON.stringify(users));
-    } else {
-      const users = [];
-      users.push(this.signUpObj);
-      localStorage.setItem('angular17users', JSON.stringify(users));
-    }
+      });
   }
-
   onLogin() {
-    const localUsers = localStorage.getItem('angular17users');
-    if (localUsers != null) {
-      const users = JSON.parse(localUsers);
-
-      const isUserPresent = users.find(
-        (user: SignUpModel) =>
-          user.email == this.loginObj.email &&
-          user.password == this.loginObj.password
-      );
-      if (isUserPresent != undefined) {
-        alert('User Found...');
-        localStorage.setItem('loggedUser', JSON.stringify(isUserPresent));
-        this.router.navigateByUrl('/selectCharacter');
-      } else {
-        alert('No User Found');
+    this.errorMsg = [];
+    this.authService.authenticate({
+      body: this.authRequest
+    }).subscribe({
+      next: (res) => {
+        this.tokenService.token = res.token as string;
+       this.router.navigateByUrl('/selectCharacter');
+      },
+      error: (err) => {
+        console.log(err);
+        if (err.error.validationErrors) {
+          this.errorMsg = err.error.validationErrors;
+          this.showAlerts();
+        } else {
+          this.errorMsg.push(err.error.errorMsg);
+          this.showAlerts();
+        }
       }
+    });
+  }
+  showAlerts() {
+    if (this.errorMsg.length) {
+      alert(this.errorMsg.join('\n'));
     }
-  }
 }
-
-export class SignUpModel {
-  name: string;
-  email: string;
-  password: string;
-
-  constructor() {
-    this.email = '';
-    this.name = '';
-    this.password = '';
-  }
-}
-
-export class LoginModel {
-  email: string;
-  password: string;
-
-  constructor() {
-    this.email = '';
-    this.password = '';
-  }
 }
