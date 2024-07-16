@@ -3,7 +3,7 @@
 
 Uttarakhand Speaks is an AI-powered local language learning platform designed to help users learn the local languages of Uttarakhand, including Garhwali and Kumaoni. The platform provides interactive lessons and AI-based tools to enhance the learning experience.
 
-This website is about making people familar with our local languages, which are designated as "vulnerable" in UNESCO's Atlas of the World's Languages in Danger, which indicates that the language requires consistent conservation efforts.
+This website helps people to get familar with our local languages, which are designated as "vulnerable" in UNESCO's Atlas of the World's Languages in Danger, which indicates that the language requires consistent conservation efforts.
 
 
 ## Features
