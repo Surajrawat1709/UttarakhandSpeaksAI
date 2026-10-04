@@ -1,27 +1,80 @@
-# Chatdif
+# UttarakhandSpeaks AI — Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+Modern React 18 frontend for the UttarakhandSpeaks AI app.
 
-## Development server
+## Tech Stack
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + Vite |
+| Language | TypeScript |
+| Styling | Tailwind CSS v3 |
+| Routing | React Router DOM v6 |
+| State | React Context API |
+| HTTP | Axios |
 
-## Code scaffolding
+## Project Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+src/
+├── components/       # Reusable UI components
+│   ├── Header.tsx
+│   ├── MessagePanel.tsx
+│   └── UserInput.tsx
+├── context/
+│   └── AppContext.tsx # Global state (username, animeName, currentImage, token)
+├── constants/
+│   └── index.ts      # Character data, view/type/mood options
+├── pages/
+│   ├── LoginPage.tsx
+│   ├── SelectCharacterPage.tsx
+│   ├── SelectVisualsPage.tsx
+│   ├── ChatPage.tsx
+│   ├── GenerateImagePage.tsx
+│   └── PaymentPage.tsx
+├── services/
+│   └── api.ts        # Axios client + all API functions
+├── types/
+│   └── index.ts      # TypeScript interfaces & enums
+├── App.tsx           # Router setup
+├── main.tsx          # Entry point
+└── index.css         # Tailwind + global styles
+```
 
-## Build
+## Routes
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Path | Page |
+|---|---|
+| `/` | → redirect to `/selectCharacter` |
+| `/login` | Login / Register |
+| `/selectCharacter` | Choose AI character |
+| `/selectVisuals` | Customize scene & appearance |
+| `/chatpage` | Chat with AI character |
+| `/generateImg` | Generate character image |
+| `/payment` | Payment via Razorpay |
 
-## Running unit tests
+## Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm install
+npm run dev        # Start dev server at http://localhost:5173
+npm run build      # Production build
+```
 
-## Running end-to-end tests
+## Backend API
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The Vite dev server proxies `/api/*` requests to `http://localhost:8000`.
+Configure the target in `vite.config.ts` → `server.proxy`.
 
-## Further help
+### Endpoints Used
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/` | Health check |
+| `POST` | `/api/api/predict` | Chat query |
+| `POST` | `/api/api/login/` | Create user |
+| `POST` | `/api/api/select_anime/` | Select anime/character |
+| `GET` | `/api/api/initchat` | Initialize chat |
+| `POST` | `/api/auth/register` | Register |
+| `POST` | `/api/auth/authenticate` | Login |
+| `POST` | `http://localhost:8080/pg/createOrder` | Payment order |
